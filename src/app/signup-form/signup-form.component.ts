@@ -33,8 +33,8 @@ export class SignupFormComponent implements OnInit {
     this.user.user_Fname = this.signupForm.value.firstName;
     this.user.user_Lname = this.signupForm.value.lastName;
     this.user.user_password = this.signupForm.value.password;
-    this.http.postData('/user', this.user).subscribe(data => {
-      console.log('UserInformation submitted: ', data);
+    this.http.postData('/user', this.user).subscribe(() => {
+      console.log('UserInformation submitted: ',this.user)
       this.http.getData('/user').subscribe(data =>{
         console.log("GET",data)
       });
