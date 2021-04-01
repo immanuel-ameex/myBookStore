@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { HttpDataService } from '../http-data.service';
+import { HttpdataService } from '../httpdata.service';
+
 
 @Component({
   selector: 'mbs-signup-form',
@@ -21,7 +22,7 @@ export class SignupFormComponent implements OnInit {
     user_password: '',
   }
 
-  constructor(private http: HttpDataService) { }
+  constructor(private http: HttpdataService) { }
 
   ngOnInit(): void {
   }
@@ -32,8 +33,11 @@ export class SignupFormComponent implements OnInit {
     this.user.user_Fname = this.signupForm.value.firstName;
     this.user.user_Lname = this.signupForm.value.lastName;
     this.user.user_password = this.signupForm.value.password;
-    this.http.postData('user', this.user).subscribe(data => {
+    this.http.postData('/user', this.user).subscribe(data => {
       console.log('UserInformation submitted: ', data);
+      this.http.getData('/user').subscribe(data =>{
+        console.log("GET",data)
+      });
     });
   }
 
